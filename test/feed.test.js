@@ -1,5 +1,5 @@
-const { expect, assert } = require('chai');
-const { client, feed } = require('../src/');
+const { expect, assert } = require('chai');
+const { client, feed } = require('../src/');
 
 describe('#feed', () => {
 
@@ -16,25 +16,28 @@ describe('#feed', () => {
 
     // Create an observable changefeed from query
     s = feed(
-    // Pass in any database query
-      r.table('test').filter({value: 'somevalue'})
+      // Pass in any database query
+      r.table('test').filter({ value: 'somevalue' })
     )
-    // Subscribe to changes
-    .subscribe(change => {
-    // Example change object:
-    // {
-    //   type: 'update',
-    //   prev: {<previous value>},
-    //   next: {<new value>}
-    // }
-      expect(change.type).to.equal('insert');
-      expect(change.next.value).to.equal('somevalue');
-    // Will timeout if subscribe doesn't work properly
-      done();
-    });
+      // Subscribe to changes
+      .subscribe(buffer => {
+        const change = JSON.parse(buffer.toString())
+        // Example change object:
+        // {
+        //   type: 'update',
+        //   prev: {<previous value>},
+        //   next: {<new value>}
+        // }
+        expect(change.type).to.equal('insert');
+        expect(change.next.value).to.equal('somevalue');
+        // Will timeout if subscribe doesn't work properly
+        done();
+      });
 
     // Perform example insert
-    r.table('test').insert({value: 'somevalue'});
+    setTimeout(async () => {
+      await r.table('test').insert({ value: 'somevalue' });
+    }, 500)
   });
 
   // TODO: Add test case for 'insert'
@@ -50,8 +53,8 @@ describe('#feed', () => {
   //
 
   after(async () => {
+    s.dispose();
     await r.tableDrop('test');
     await r.getPoolMaster().drain();
-    s.dispose();
   });
 });
