@@ -32,7 +32,7 @@ Although promises are great they are not particularly well suited for event base
 
 You are expected to complete the following tasks:
 
-- [ ] Setup environment
+- [x] Setup environment
 - Fork this repository to your own GitHub profile
 - Setup development environment with RethinkDB and Node >=8.0.0
 - Use Docker to get up and running fast with RethinkDB
