@@ -52,7 +52,7 @@ You are expected to complete the following tasks:
 - Unit test your module using mocha and chai
 
 
-- [ ] Documentation
+- [x] Documentation
 - Write a lightweight documentation for your solution
 
 Finally check `playground.js` and play around with your new module!
