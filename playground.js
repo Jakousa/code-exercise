@@ -18,12 +18,12 @@ client().then(r => {
     console.log('this item was updated: ', prev, 'with new value: ', next);
   });
 
-  setInterval(() => {
-    r.table('test').insert({value: 'foo'});
+  setInterval(async () => {
+    await r.table('test').insert({value: 'foo'});
   }, 2000);
 
-  setInterval(() => {
-    r.table('test').filter({value: 'foo'}).limit(1).update({value: 'bar'});
+  setInterval(async () => {
+    await r.table('test').filter({value: 'foo'}).limit(1).update({value: 'bar'});
   }, 2000);
 
 })
