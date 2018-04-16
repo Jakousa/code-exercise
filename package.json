@@ -4,6 +4,7 @@
   "description": "RX wrapper for RethinkDB changefeeds",
   "main": "index.js",
   "scripts": {
+    "start": "node playground.js",
     "test": "node_modules/.bin/mocha --require babel-register --timeout 3000 --full-trace --check-leaks test/*"
   },
   "repository": {

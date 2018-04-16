@@ -20,8 +20,7 @@ describe('#feed', () => {
       r.table('test').filter({ value: 'somevalue' })
     )
       // Subscribe to changes
-      .subscribe(buffer => {
-        const change = JSON.parse(buffer.toString())
+      .subscribe(change => {
         // Example change object:
         // {
         //   type: 'update',
@@ -37,7 +36,7 @@ describe('#feed', () => {
     // Perform example insert
     setTimeout(async () => {
       await r.table('test').insert({ value: 'somevalue' });
-    }, 500)
+    }, 100)
   });
 
   // TODO: Add test case for 'insert'
@@ -53,7 +52,9 @@ describe('#feed', () => {
   //
 
   after(async () => {
-    s.dispose();
+    if (s) {
+      s.dispose();
+    }
     await r.tableDrop('test');
     await r.getPoolMaster().drain();
   });

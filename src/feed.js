@@ -9,9 +9,14 @@ const remappedTypes = {
 // RX observable
 module.exports = (queryObject) => {
   const readable = new Readable({
-    read(size) {}
+    objectMode: true,
+    read: (size) => { }
   })
   queryObject.changes({ includeTypes: true }).run((err, muuta) => {
+    if (!muuta) {
+      console.log('Error', err)
+      return
+    }
     muuta.each((err, message) => {
       if (!err) {
         const formattedMessage = {
@@ -19,7 +24,7 @@ module.exports = (queryObject) => {
           prev: message.old_val,
           next: message.new_val,
         }
-        readable.push(JSON.stringify(formattedMessage))
+        readable.push(formattedMessage)
       }
     })
   })
