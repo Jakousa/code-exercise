@@ -43,12 +43,12 @@ You are expected to complete the following tasks:
 - Adhere to the same coding style
 
 
-- [ ] Module implementation
+- [x] Module implementation
 - Use whatever NPM packages and resources you might need
 - Use ES6 with Node >=8.0.0
 
 
-- [ ] Unit tests
+- [x] Unit tests
 - Unit test your module using mocha and chai
 
 

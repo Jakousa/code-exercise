@@ -9,8 +9,7 @@ describe('#client', () => {
     r = await client();
   });
 
-  // TODO: Add test cases
-  //
+  // I trust rethinkdb can test themselves. 
 
   after(async () => {
     await r.getPoolMaster().drain();

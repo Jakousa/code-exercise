@@ -3,7 +3,8 @@ const { Readable } = require('stream')
 
 const remappedTypes = {
   add: 'insert',
-  change: 'update'
+  change: 'update',
+  remove: 'delete'
 }
 // Export a function that wraps any database query changefeed into
 // RX observable
